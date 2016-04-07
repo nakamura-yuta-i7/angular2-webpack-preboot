@@ -1,0 +1,19 @@
+{
+  "name": "angular2-webpack-preboot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server:dev": "cd backend && npm run supervisor",
+    "server": "cd backend && npm start",
+    "client:dev": "cd client && npm run start",
+    "start": "npm run server",
+    "start:dev": "concurrently 'npm run server:dev' 'npm run client:dev' ",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^2.0.0"
+  }
+}
