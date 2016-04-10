@@ -10,6 +10,7 @@ router.get('/auth', function(req, res, next) {
     email: "yuta.nakamura.i7@gmail.com",
   }
   var token = jwt.sign(user, cert);
+  console.log( {token: token} );
   res.json(token);
 });
 

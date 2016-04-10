@@ -29,17 +29,17 @@ app.use(express.static(public_dir));
   var api = require('./routes/api');
   var jwtCheck = jwt({
     secret: secret,
-    credentialsRequired: true,
-    getToken: function fromHeaderOrQuerystring (req) {
-      console.log( "req.headers", req.headers );
-      console.log( "req.query", req.query );
-      if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
-          return req.headers.authorization.split(' ')[1];
-      } else if (req.query && req.query.token) {
-        return req.query.token;
-      }
-      return null;
-    }
+    // credentialsRequired: true,
+    // getToken: function fromHeaderOrQuerystring (req) {
+    //   console.log( "req.headers", req.headers );
+    //   console.log( "req.query", req.query );
+    //   if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
+    //       return req.headers.authorization.split(' ')[1];
+    //   } else if (req.query && req.query.token) {
+    //     return req.query.token;
+    //   }
+    //   return null;
+    // }
   });
   
   app.use('/api', jwtCheck, api);

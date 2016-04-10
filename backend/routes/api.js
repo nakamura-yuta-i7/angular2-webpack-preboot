@@ -3,7 +3,8 @@ var router = express.Router();
 var app = express();
 
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+  console.log( req );
+  res.json('respond with a resource');
 });
 
 router.get('/protected',function(req, res) {

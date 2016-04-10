@@ -41,7 +41,9 @@ document.addEventListener('DOMContentLoaded', function main() {
     ...[AppState],
     provide(AuthHttp, {
       useFactory: (http) => {
-        return new AuthHttp(new AuthConfig(), http);
+        return new AuthHttp(new AuthConfig({
+          noJwtError: true
+        }), http);
       },
       deps: [Http]
     }),

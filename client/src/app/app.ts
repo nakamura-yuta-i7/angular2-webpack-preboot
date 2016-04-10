@@ -34,18 +34,14 @@ import {Login} from "./components/login";
 export class App {
   url: string = 'https://github.com/preboot/angular2-webpack';
   
-  public is_logged_in: boolean;
+  private _localStorage: any;
   constructor(
     public api: Api,
     public appState: AppState,
     public http: Http,
     public router: Router, public title: Title
   ) {
-    this.appState.set("is_logged_in", Cookie.getCookie('token') );
-    localStorage.setItem("id_token", Cookie.getCookie('token') );
-    console.log( "localStorage", localStorage );
-    this.is_logged_in = this.appState.get().is_logged_in;
-    this.subscribeTitle();
+    this._localStorage = localStorage;
   }
   subscribeTitle() {
     this.router.subscribe((url)=>{
@@ -57,9 +53,6 @@ export class App {
     }
   }
   logout() {
-    this.appState.set("is_logged_in", false );
-    this.is_logged_in = false;
-    Cookie.deleteCookie('token');
-    console.log( "delete Cookie: token" );
+    localStorage.removeItem("id_token")
   }
 }

@@ -5,8 +5,8 @@
     <a [routerLink]="['Home']">Home</a>
     <a [routerLink]="['About']">About</a>
     <a [routerLink]="['PlayApi']">PlayApi</a>
-    <a *ngIf=" ! is_logged_in " [routerLink]="['Login']">Login</a>
-    <a *ngIf=" is_logged_in " (click)="logout()">Logout</a>
+    <a *ngIf=" ! _localStorage.getItem('id_token') " [routerLink]="['Login']">Login</a>
+    <a *ngIf="   _localStorage.getItem('id_token') " (click)="logout()">Logout</a>
   </nav>
 </header>
 <main>

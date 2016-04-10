@@ -1,7 +1,6 @@
 import {Component, OnInit} from 'angular2/core';
 import {AuthHttp, JwtHelper} from 'angular2-jwt';
 import {Http} from 'angular2/http';
-import {Cookie} from 'ng2-cookies/ng2-cookies';
 
 @Component({
   selector: 'about',
@@ -29,12 +28,11 @@ export class Login implements OnInit {
   login() {
     this.http.get("/auth").subscribe(data=>{
       let token = data.json();
-      Cookie.setCookie('token', token);
-      console.log( "set Cookie", {token} );
+      localStorage.setItem("id_token", token);
     });
   }
   showToken() {
-    let token = Cookie.getCookie('token');
+    let token = localStorage.getItem("id_token");
     console.log( {token} );
   }
   ngOnInit() {
