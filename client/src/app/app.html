@@ -1,15 +1,15 @@
 <header>
+  <a href="/"><img class="logo" src="/img/shield-with-beta.png"></a>
+  <span>Hello from {{api.title}} !</span>
   <nav>
     <a [routerLink]="['Home']">Home</a>
     <a [routerLink]="['About']">About</a>
+    <a [routerLink]="['PlayApi']">PlayApi</a>
+    <a *ngIf=" ! is_logged_in " [routerLink]="['Login']">Login</a>
+    <a *ngIf=" is_logged_in " (click)="logout()">Logout</a>
   </nav>
 </header>
 <main>
-  <h1 class="title">Hello from {{api.title}} !</h1>
-
-  <!-- Images (and assets) are parsed and loaded from within the public directory -->
-  <img src="/img/shield-with-beta.png">
-
   <router-outlet></router-outlet>
 </main>
 <footer>

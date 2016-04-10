@@ -255,6 +255,7 @@ module.exports = function makeWebpackConfig() {
     historyApiFallback: true,
     stats: 'minimal', // none (or false), errors-only, minimal, normal (or true) and verbose
     proxy: {
+      "/auth": "http://localhost:3000",
       "/api*": "http://localhost:3000" // /api以下にアクセスがあった場合はhttp://localhost:8080に流す
     }
   };

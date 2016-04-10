@@ -5,12 +5,22 @@
 
 header {
   background-color: #fff;
-  padding: 16px;
+  padding: 5px;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+  span {
+    color: #ccc;
+  }
+  .logo {
+    width: 80px;
+    display: inline-block;
+  }
+  nav {
+    display: inline-block;
+  }
 }
 
 main {

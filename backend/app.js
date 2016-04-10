@@ -23,8 +23,28 @@ var public_dir = path.join(__dirname, '../client/dist')
 app.use(express.static(public_dir));
 
 // APIリクエスト制御
-var api = require('./routes/api');
-app.use('/api', api);
+(function() {
+  var jwt = require('express-jwt');
+  var secret = require("fs").readFileSync('private.key');
+  var api = require('./routes/api');
+  var jwtCheck = jwt({
+    secret: secret,
+    credentialsRequired: true,
+    getToken: function fromHeaderOrQuerystring (req) {
+      console.log( "req.headers", req.headers );
+      console.log( "req.query", req.query );
+      if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
+          return req.headers.authorization.split(' ')[1];
+      } else if (req.query && req.query.token) {
+        return req.query.token;
+      }
+      return null;
+    }
+  });
+  
+  app.use('/api', jwtCheck, api);
+  
+})();
 
 // 公開ディレクトリに存在しないファイル、
 // またはルーティング設定していないリクエストの制御
@@ -45,10 +65,8 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
-    });
+    console.log( "koko error dev", err );
+    res.json(err)
   });
 }
 
@@ -56,10 +74,9 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
+  // res.json(err.message)
+  console.log( "koko error", err );
+  res.json(err)
 });
 
 
