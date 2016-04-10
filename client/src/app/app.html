@@ -8,6 +8,9 @@
     <a *ngIf=" ! _localStorage.getItem('id_token') " [routerLink]="['Login']">Login</a>
     <a *ngIf="   _localStorage.getItem('id_token') " (click)="logout()">Logout</a>
   </nav>
+  <aside>
+    {{_email}}
+  </aside>
 </header>
 <main>
   <router-outlet></router-outlet>

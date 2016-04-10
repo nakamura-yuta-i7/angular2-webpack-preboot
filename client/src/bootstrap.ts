@@ -3,7 +3,7 @@ import {bootstrap, ELEMENT_PROBE_PROVIDERS} from 'angular2/platform/browser';
 import {ROUTER_PROVIDERS, LocationStrategy, PathLocationStrategy} from 'angular2/router';
 import {HTTP_PROVIDERS, Http} from 'angular2/http';
 
-import {AuthHttp, AuthConfig} from 'angular2-jwt';
+import {AuthHttp, AuthConfig, JwtHelper} from 'angular2-jwt';
 
 // Angular2 @LocalStorage
 // https://github.com/marcj/angular2-localStorage
@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', function main() {
     ...ROUTER_PROVIDERS,
     ...ENV_PROVIDERS,
     ...[AppState],
+    ...[JwtHelper],
     provide(AuthHttp, {
       useFactory: (http) => {
         return new AuthHttp(new AuthConfig({
